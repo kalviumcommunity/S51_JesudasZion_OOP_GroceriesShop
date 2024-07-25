@@ -14,12 +14,12 @@ class User {
         bool logCheck;
 
         static unordered_map<string , string> users;
-        static int lastUserID ;   
+        static int lastUserID;  
 
     public:
         User() : logCheck(false) {}
 
-        bool login(const string& uname, const string& pwd) {
+        bool login(string uname, string pwd) {
             if (users.find(uname) != users.end() && users[uname] == pwd) {
                 userName = uname;
                 password = pwd;
