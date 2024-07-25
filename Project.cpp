@@ -7,7 +7,7 @@ using namespace std;
 class User {
     private:
         string userName;  
-        string userID;  
+        int userID;  
         string email;  
         string password;
 
@@ -19,10 +19,12 @@ class User {
     public:
         User() : logCheck(false) {}
 
-        bool login(string uname, string pwd) {
+        bool login(string uname, string pwd , string email) {
             if (users.find(uname) != users.end() && users[uname] == pwd) {
                 userName = uname;
                 password = pwd;
+                email = email;
+                userID = ++lastUserID;
                 logCheck = true;
                 cout << "Login successful!" << endl;
                 return true;
@@ -36,6 +38,8 @@ class User {
             if (logCheck) {
                 userName = "";
                 password = "";
+                email = "";
+                userID = -1;
                 logCheck = false;
                 cout << "Logout successful!" << endl;
             } else {
@@ -91,8 +95,8 @@ int main() {
     cout << "Hello, World!" << endl;
 
     User customer1;
-    customer1.login("user1", "wrongpassword");
-    customer1.login("user1", "password1");
+    customer1.login("user1", "wrongpassword", "Zion@123");
+    customer1.login("user1", "password1","Zion@134");
 
     // Check if the user is logged in
     if (customer1.isLoggedIn()) {
