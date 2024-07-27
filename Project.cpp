@@ -79,6 +79,13 @@ class Product {
             cout << "Price: $" << price << endl;
             cout << "Quantity: " << quantity << endl;
         }
+
+        void updateQuantity(int amount){
+            this->quantity = amount;
+        }
+        void updatePrice(double price){
+            this->price = price;
+        }
 };
 
 unordered_map<string, string> User::users = {
