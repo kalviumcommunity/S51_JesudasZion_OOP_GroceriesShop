@@ -1,13 +1,13 @@
 #include <iostream>
 #include <string>
 #include <unordered_map>
+#include <vector>
 
 using namespace std;
 
 class User {
     private:
         string userName;  
-        int userID;  
         string email;  
         string password;
 
@@ -17,6 +17,7 @@ class User {
         static int lastUserID;  
 
     public:
+        int userID;  
         User() : logCheck(false) {}
 
         bool login(string uname, string pwd , string email) {
@@ -80,6 +81,10 @@ class Product {
             cout << "Quantity: " << quantity << endl;
         }
 
+        string getProductName() const {
+            return this->name;
+        }
+
         void updateQuantity(int amount){
             this->quantity = amount;
         }
@@ -87,6 +92,25 @@ class Product {
             this->price = price;
         }
 };
+
+class Customer : public User {
+    private :
+        int customerID ;
+        vector<Product> cart;
+
+    public:
+        Customer() : User(){
+            customerID = userID;
+        } 
+
+        void addToCart(const Product& product){
+            cart.push_back(product);
+                    std::cout << "Added " << product.getProductName() << " to the cart." << std::endl;
+
+        }
+        
+};
+
 
 unordered_map<string, string> User::users = {
     {"user1", "password1"},
@@ -101,7 +125,7 @@ int User::lastUserID = 0;
 int main() {
     cout << "Hello, World!" << endl;
 
-    User customer1;
+    Customer customer1;
     customer1.login("user1", "wrongpassword", "Zion@123");
     customer1.login("user1", "password1","Zion@134");
 
@@ -112,6 +136,8 @@ int main() {
 
     Product product1("P001", "Apple", "Fruit", 0.99, 100);
     product1.display();
+
+    customer1.addToCart(product1);
 
     return 0;
 }
