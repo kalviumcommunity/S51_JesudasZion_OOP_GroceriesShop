@@ -125,19 +125,22 @@ int User::lastUserID = 0;
 int main() {
     cout << "Hello, World!" << endl;
 
-    Customer customer1;
-    customer1.login("user1", "wrongpassword", "Zion@123");
-    customer1.login("user1", "password1","Zion@134");
+    Customer* customer1 = new Customer;
+    customer1->login("user1", "wrongpassword", "Zion@123");
+    customer1->login("user1", "password1","Zion@134");
 
     // Check if the user is logged in
-    if (customer1.isLoggedIn()) {
+    if (customer1->isLoggedIn()) {
         cout << "Currently logged" << '\n';
     }
 
     Product product1("P001", "Apple", "Fruit", 0.99, 100);
     product1.display();
 
-    customer1.addToCart(product1);
+    customer1->addToCart(product1);
+    customer1->logout();
+    delete customer1;
+    customer1 = nullptr;
 
     return 0;
 }
