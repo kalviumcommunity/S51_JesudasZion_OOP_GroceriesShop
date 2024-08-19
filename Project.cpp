@@ -20,8 +20,13 @@ class User {
         int userID;  
         User() : logCheck(false) {}
 
+
+        static bool validateCredentials(const string& uname, const string& pwd) {
+            return users.find(uname) != users.end() && users[uname] == pwd;
+        }
+
         bool login(string uname, string pwd , string email) {
-            if (users.find(uname) != users.end() && users[uname] == pwd) {
+            if (User::validateCredentials(uname, pwd)) {
                 userName = uname;
                 password = pwd;
                 email = email;
@@ -129,7 +134,6 @@ int main() {
     customer1->login("user1", "wrongpassword", "Zion@123");
     customer1->login("user1", "password1","Zion@134");
 
-    // Check if the user is logged in
     if (customer1->isLoggedIn()) {
         cout << "Currently logged" << '\n';
     }
