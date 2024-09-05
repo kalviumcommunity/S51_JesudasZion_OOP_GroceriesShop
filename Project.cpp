@@ -60,6 +60,9 @@ class User {
         string getUserName() const {
             return userName;
         }
+        void setNewUserName(string name) {
+            this->userName = name; 
+        }
 };
 
 class Product {
@@ -100,13 +103,11 @@ class Product {
 
 class Customer : public User {
     private :
-        int customerID ;
+
         vector<Product> cart;
 
     public:
-        Customer() : User(){
-            customerID = userID;
-        } 
+        Customer() : User(){} 
 
         void addToCart(const Product& product){
             cart.push_back(product);
@@ -133,13 +134,20 @@ int main() {
     Customer* customer1 = new Customer;
     customer1->login("user1", "wrongpassword", "Zion@123");
     customer1->login("user1", "password1","Zion@134");
+    cout << customer1->getUserName() << "\n";
+    customer1->setNewUserName("hello") ;
+    cout << customer1->getUserName() << "\n";
 
+    
     if (customer1->isLoggedIn()) {
         cout << "Currently logged" << '\n';
     }
 
     Product product1("P001", "Apple", "Fruit", 0.99, 100);
     product1.display();
+    product1.updatePrice(1.00);
+    product1.updateQuantity(50);
+
 
     customer1->addToCart(product1);
     customer1->logout();
@@ -147,4 +155,4 @@ int main() {
     customer1 = nullptr;
 
     return 0;
-}
+}    
