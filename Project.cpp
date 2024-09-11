@@ -77,6 +77,8 @@ class Product {
         // Default constructor
         Product() : productID(""), name(""), category(""), price(0.0), quantity(0) {}
 
+        ~Product(){}
+
         // Parameterized constructor
         Product(string pID, string pName, string pCategory, double pPrice, int pQuantity) 
             : productID(pID), name(pName), category(pCategory), price(pPrice), quantity(pQuantity) {}
@@ -108,6 +110,7 @@ class Customer : public User {
 
     public:
         Customer() : User(){} 
+        ~Customer() {}
 
         void addToCart(const Product& product){
             cart.push_back(product);
