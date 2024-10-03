@@ -62,10 +62,8 @@ class User {
             this->userName = name; 
         }
 
-        // Virtual function for polymorphism
-        virtual void viewRole() const {
-            cout << "User Role: General User" << endl;
-        }
+        virtual void viewRole() const = 0;
+
 };
 
 class Product {
